@@ -7,7 +7,12 @@ class cordic{
 
     private:
 
+        float PI = 3.14159265359f;
         std::vector<float> LUT;
+
+    public:
+        std::vector<float> cordic_rotation(float z, int n);
+        std::vector<std::vector<float>> sin_cos_generator(std::vector<float> z, int n);
 
         /*
             setting gain of signal 
@@ -19,10 +24,6 @@ class cordic{
             and setting it private vector LUT
         */
         void set_LUT(int n);
-
-    public:
-        std::vector<float> cordic_rotation(float x, float y, float z, int n);
-        std::vector<std::vector<float>> sin_cos_generator(float x, float y, std::vector<float> z, int n);
         
 };
 
