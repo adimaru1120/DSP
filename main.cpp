@@ -32,10 +32,14 @@ void save_to_file(std::vector<std::vector<float>> re){
 int main(){
 
     
-    std::vector<float> theta = arange<float>(-1, 1, pow(2, -8));
+    std::vector<float> theta = arange<float>(-5, 5, pow(2, -8));
 
     cordic dsp;
-    std::vector<std::vector<float>> res = dsp.sin_cos_generator(1, 0, theta, 12);
+
+    int n = 12;
+
+    std::vector<std::vector<float>> res = dsp.sin_cos_generator(theta, n);
+
     save_to_file(res);
     
 
