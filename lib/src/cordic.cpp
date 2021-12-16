@@ -25,15 +25,15 @@ void cordic::set_LUT(int n){
 }
 
 
-std::vector<float> cordic::cordic_rotation(float z, int n){   
+std::vector<float> cordic::cordic_rotation(float theta, int n){   
 
-    if(z < -cordic::PI / 2 || z > cordic::PI / 2){
+    if(theta < -cordic::PI / 2 || theta > cordic::PI / 2){
         std::vector<float> rotated;
-        if(z < 0){
-            rotated = cordic::cordic_rotation(z + cordic::PI, n);
+        if(theta < 0){
+            rotated = cordic::cordic_rotation(theta + cordic::PI, n);
         }
         else{
-            rotated = cordic::cordic_rotation(z - cordic::PI, n);
+            rotated = cordic::cordic_rotation(theta - cordic::PI, n);
         }
 
         rotated[0] = -rotated[0];
@@ -48,15 +48,15 @@ std::vector<float> cordic::cordic_rotation(float z, int n){
     float yt;
 
     for(int i = 0; i < n; ++i){
-        if(z < 0){
+        if(theta < 0){
             xt = x + (y * pow(2, -i));
             yt = y - (x * pow(2, -i));
-            z = z + cordic::LUT[i];
+            theta = theta + cordic::LUT[i];
         }
         else{
             xt = x - (y * pow(2, -i));
             yt = y + (x * pow(2, -i));
-            z = z - cordic::LUT[i]; 
+            theta = theta - cordic::LUT[i]; 
         }
 
         x = xt; y = yt;
@@ -68,15 +68,15 @@ std::vector<float> cordic::cordic_rotation(float z, int n){
 
 }
 
-std::vector<std::vector<float>> cordic::sin_cos_generator(std::vector<float> z, int n){
+std::vector<std::vector<float>> cordic::sin_cos_generator(std::vector<float> theta, int n){
     float gain = cordic::set_gain(n);
     cordic::set_LUT(n);
 
     std::vector<float> xt;
     std::vector<float> yt;
 
-    for(int i = 0; i < z.size(); ++i){
-        std::vector<float> rot = cordic::cordic_rotation(z[i], n);
+    for(int i = 0; i < theta.size(); ++i){
+        std::vector<float> rot = cordic::cordic_rotation(theta[i], n);
         rot[0] = rot[0] * gain;
         rot[1] = rot[1] * gain;
         xt.push_back(rot[0]);

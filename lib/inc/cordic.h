@@ -11,8 +11,15 @@ class cordic{
         std::vector<float> LUT;
 
     public:
-        std::vector<float> cordic_rotation(float z, int n);
-        std::vector<std::vector<float>> sin_cos_generator(std::vector<float> z, int n);
+        /*
+            performing rotation of a vector by specific angle in radians (theta)
+        */
+        std::vector<float> cordic_rotation(float theta, int n);
+
+        /*
+            computes sine and cosine signal of the input angle in radians (theta)
+        */
+        std::vector<std::vector<float>> sin_cos_generator(std::vector<float> theta, int n);
 
         /*
             setting gain of signal 
