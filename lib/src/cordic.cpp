@@ -70,6 +70,7 @@ std::vector<float> cordic::cordic_rotation(float z, int n){
 
 std::vector<std::vector<float>> cordic::sin_cos_generator(std::vector<float> z, int n){
     float gain = cordic::set_gain(n);
+    cordic::set_LUT(n);
 
     std::vector<float> xt;
     std::vector<float> yt;
